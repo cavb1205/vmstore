@@ -18,75 +18,240 @@ const links = [
     icon: "instagram"
   }
 ];
+
+const currentUrl = "https://vmstore-linktree.vercel.app";
 ---
 
 <Layout 
   title="VM STORE - Ropa Urbana Colombia"
-  description="VM STORE - Tienda de ropa urbana en Colombia. Gorras y camisetas urbanas. WhatsApp, TikTok, Instagram."
+  description="VM STORE - Tienda de ropa urbana en Colombia. Gorras y camisetas urbanas. Ubicados en Ibagué - Tolima."
   image="/vm_store.jpeg"
 >
-  <div class="min-h-screen bg-gradient-to-b from-gray-900 via-black to-gray-900 flex flex-col items-center px-4 py-12">
+  <div id="app" class="min-h-screen transition-colors duration-300">
     
-    <div class="w-full max-w-md flex flex-col items-center gap-8">
+    <!-- Theme Toggle -->
+    <button 
+      id="theme-toggle"
+      class="fixed top-4 right-4 z-50 p-3 rounded-full bg-white/10 backdrop-blur-md border border-white/20 hover:scale-110 transition-transform duration-300"
+      aria-label="Cambiar tema"
+    >
+      <svg id="sun-icon" class="w-5 h-5 hidden" fill="currentColor" viewBox="0 0 24 24">
+        <path d="M12 7a5 5 0 100 10 5 5 0 000-10zm0-5a1 1 0 011 1v2a1 1 0 11-2 0V3a1 1 0 011-1zm0 18a1 1 0 011 1v2a1 1 0 11-2 0v-2a1 1 0 011-1zm9-9a1 1 0 110 2h-2a1 1 0 110-2h2zM5 12a1 1 0 110 2H3a1 1 0 110-2h2zm14.07-6.36a1 1 0 010 1.41l-1.42 1.42a1 1 0 11-1.41-1.41l1.42-1.42a1 1 0 011.41 0zM7.36 16.64a1 1 0 010 1.42l-1.42 1.41a1 1 0 11-1.41-1.41l1.42-1.42a1 1 0 011.41 0zm12.36-1.41a1 1 0 011.42 0l1.42 1.42a1 1 0 11-1.41 1.41l-1.42-1.42a1 1 0 010-1.41zM7.36 7.36a1 1 0 01-1.41 0L4.52 5.95A1 1 0 016.94 4.53l1.42 1.42a1 1 0 010 1.41z"/>
+      </svg>
+      <svg id="moon-icon" class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+        <path d="M12 3a9 9 0 109 9c0-.46-.04-.92-.1-1.36a5.389 5.389 0 01-4.4 2.26 5.403 5.403 0 01-3.14-9.8c-.44-.06-.9-.1-1.36-.1z"/>
+      </svg>
+    </button>
+
+    <!-- Share Button -->
+    <button 
+      id="share-toggle"
+      class="fixed top-4 left-4 z-50 p-3 rounded-full bg-white/10 backdrop-blur-md border border-white/20 hover:scale-110 transition-transform duration-300"
+      aria-label="Compartir"
+    >
+      <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+        <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92s2.92-1.31 2.92-2.92-1.31-2.92-2.92-2.92z"/>
+      </svg>
+    </button>
+
+    <!-- Share Menu (hidden) -->
+    <div id="share-menu" class="fixed top-20 left-4 z-50 hidden">
+      <div class="bg-gray-900/95 backdrop-blur-md rounded-xl p-4 border border-white/20 space-y-3 w-56">
+        <p class="text-xs text-gray-400 font-semibold uppercase">Compartir</p>
+        <a 
+          href={`https://wa.me/?text=VM STORE - Ropa Urbana Colombia: ${currentUrl}`}
+          target="_blank"
+          class="flex items-center gap-3 p-2 rounded-lg hover:bg-white/10 transition-colors"
+        >
+          <svg class="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+          </svg>
+          <span>WhatsApp</span>
+        </a>
+        <button 
+          id="copy-link"
+          class="flex items-center gap-3 p-2 rounded-lg hover:bg-white/10 transition-colors w-full text-left"
+        >
+          <svg class="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"/>
+          </svg>
+          <span>Copiar enlace</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="min-h-screen bg-gradient-to-b transition-all duration-300 flex flex-col items-center px-4 py-12">
       
-      <div class="relative">
-        <div class="absolute inset-0 bg-gradient-to-r from-pink-500 via-purple-500 to-cyan-500 blur-xl opacity-50 rounded-full"></div>
-        <div class="relative p-1 rounded-full bg-gradient-to-r from-pink-500 via-purple-500 to-cyan-500">
-          <img 
-            src="/vm_store.jpeg" 
-            alt="VM STORE" 
-            class="w-36 h-36 object-contain rounded-full bg-black"
-          />
+      <div class="w-full max-w-md flex flex-col items-center gap-8 opacity-0 animate-fade-in">
+        
+        <!-- Logo con animación pulse -->
+        <div class="relative animate-pulse-slow">
+          <div class="absolute inset-0 bg-gradient-to-r from-pink-500 via-purple-500 to-cyan-500 blur-xl opacity-50 rounded-full"></div>
+          <div class="relative p-1 rounded-full bg-gradient-to-r from-pink-500 via-purple-500 to-cyan-500">
+            <img 
+              src="/vm_store.jpeg" 
+              alt="VM STORE" 
+              class="w-36 h-36 object-contain rounded-full"
+            />
+          </div>
         </div>
-      </div>
 
-      <div class="text-center space-y-2">
-        <h1 class="font-['Bebas_Neue'] text-5xl tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-pink-400 via-purple-400 to-cyan-400">
-          VM STORE
-        </h1>
-        <p class="text-gray-400 text-sm uppercase tracking-widest">Ropa Urbana Colombia</p>
-      </div>
+        <!-- Título y slogan -->
+        <div class="text-center space-y-3">
+          <h1 class="font-['Bebas_Neue'] text-5xl tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-pink-400 via-purple-400 to-cyan-400 animate-fade-in-up">
+            VM STORE
+          </h1>
+          <p class="text-sm uppercase tracking-widest animate-fade-in-up" style="animation-delay: 0.1s">
+            "Los mejores con lo mejor" 🧢
+          </p>
+          <p class="text-xs animate-fade-in-up" style="animation-delay: 0.2s">
+            GORRAS-ARTICULOS ORG/PREMIUM
+          </p>
+        </div>
 
-      <nav class="w-full flex flex-col gap-4">
-        {links.map((link) => (
-          <a
-            href={link.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="group relative w-full py-4 px-6 rounded-xl font-semibold text-white transition-all duration-300 hover:scale-[1.02] hover:shadow-lg flex items-center justify-center gap-3"
-            style="background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%); border: 1px solid rgba(255,255,255,0.1);"
-          >
-            <span class="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" style="background: linear-gradient(135deg, #ff6b6b40 0%, #845ec240 100%);"></span>
-            
-            {link.icon === 'whatsapp' && (
-              <svg class="w-6 h-6 relative z-10" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-              </svg>
-            )}
-            
-            {link.icon === 'tiktok' && (
-              <svg class="w-6 h-6 relative z-10" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93v6.16c0 2.52-1.12 4.84-2.9 6.24-1.72 1.33-3.86 2.09-6.07 1.88-3.22-.3-6.07-2.28-6.67-5.43-.52-2.77.42-5.63 2.34-7.64 1.9-2.01 4.85-2.46 7.2-1.62v4.08c-1.34-.74-2.87-.93-4.36-.66-1.49.27-2.76 1.35-3.33 2.79-.06.16-.08.32-.08.48 0 .45.23.87.62 1.17.4.3.89.47 1.4.46.91 0 1.8-.36 2.45-1.02.65-.66 1-1.56 1-2.51V.02z"/>
-              </svg>
-            )}
-            
-            {link.icon === 'instagram' && (
-              <svg class="w-6 h-6 relative z-10" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-              </svg>
-            )}
-            
-            <span class="relative z-10 text-lg">{link.name}</span>
-          </a>
-        ))}
-      </nav>
+        <!-- Links con animaciones -->
+        <nav class="w-full flex flex-col gap-4">
+          {links.map((link, index) => (
+            <a
+              href={link.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="group relative w-full py-4 px-6 rounded-xl font-semibold text-white transition-all duration-300 hover:scale-[1.02] hover:shadow-lg hover:shadow-purple-500/20 flex items-center justify-center gap-3 animate-fade-in-up"
+              style={`animation-delay: ${0.3 + index * 0.1}s`}
+            >
+              <span class="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" style="background: linear-gradient(135deg, #ff6b6b40 0%, #845ec240 100%);"></span>
+              
+              {link.icon === 'whatsapp' && (
+                <svg class="w-6 h-6 relative z-10" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                </svg>
+              )}
+              
+              {link.icon === 'tiktok' && (
+                <svg class="w-6 h-6 relative z-10" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93v6.16c0 2.52-1.12 4.84-2.9 6.24-1.72 1.33-3.86 2.09-6.07 1.88-3.22-.3-6.07-2.28-6.67-5.43-.52-2.77.42-5.63 2.34-7.64 1.9-2.01 4.85-2.46 7.2-1.62v4.08c-1.34-.74-2.87-.93-4.36-.66-1.49.27-2.76 1.35-3.33 2.79-.06.16-.08.32-.08.48 0 .45.23.87.62 1.17.4.3.89.47 1.4.46.91 0 1.8-.36 2.45-1.02.65-.66 1-1.56 1-2.51V.02z"/>
+                </svg>
+              )}
+              
+              {link.icon === 'instagram' && (
+                <svg class="w-6 h-6 relative z-10" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                </svg>
+              )}
+              
+              <span class="relative z-10 text-lg">{link.name}</span>
+            </a>
+          ))}
+        </nav>
 
-      <div class="text-center space-y-2 mt-4">
-        <p class="text-gray-500 text-xs">Colombia</p>
-        <p class="text-gray-600 text-xs">Gorras y Camisetas Urbanas</p>
+        <!-- Footer con ubicación -->
+        <div class="text-center space-y-2 mt-4">
+          <p class="text-xs opacity-80">📍 Ibagué - Tolima</p>
+          <p class="text-xs opacity-60">Colombia</p>
+        </div>
+
       </div>
 
     </div>
-
   </div>
+
+  <style is:global>
+    @keyframes fade-in {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fade-in-up {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes pulse-slow {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+    .animate-fade-in {
+      animation: fade-in 0.8s ease-out forwards;
+    }
+    .animate-fade-in-up {
+      opacity: 0;
+      animation: fade-in-up 0.6s ease-out forwards;
+    }
+    .animate-pulse-slow {
+      animation: pulse-slow 3s ease-in-out infinite;
+    }
+
+    /* Modo claro */
+    .light {
+      --bg-primary: #f8fafc;
+      --bg-secondary: #f1f5f9;
+      --text-primary: #0f172a;
+      --text-secondary: #475569;
+    }
+    .light .min-h-screen {
+      background: linear-gradient(to bottom, #f8fafc, #f1f5f9, #f8fafc);
+    }
+    .light nav a {
+      background: linear-gradient(135deg, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.02) 100%);
+      border-color: rgba(0,0,0,0.1);
+      color: #0f172a;
+    }
+    .light .text-gray-400,
+    .light .text-gray-500,
+    .light .text-gray-600 {
+      color: #475569 !important;
+    }
+  </style>
+
+  <script>
+    const themeToggle = document.getElementById('theme-toggle');
+    const sunIcon = document.getElementById('sun-icon');
+    const moonIcon = document.getElementById('moon-icon');
+    const app = document.getElementById('app');
+
+    const shareToggle = document.getElementById('share-toggle');
+    const shareMenu = document.getElementById('share-menu');
+    const copyLink = document.getElementById('copy-link');
+
+    // Theme toggle
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'light') {
+      app.classList.add('light');
+      sunIcon.classList.remove('hidden');
+      moonIcon.classList.add('hidden');
+    }
+
+    themeToggle.addEventListener('click', () => {
+      app.classList.toggle('light');
+      const isLight = app.classList.contains('light');
+      localStorage.setItem('theme', isLight ? 'light' : 'dark');
+      sunIcon.classList.toggle('hidden', !isLight);
+      moonIcon.classList.toggle('hidden', isLight);
+    });
+
+    // Share menu toggle
+    shareToggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      shareMenu.classList.toggle('hidden');
+    });
+
+    document.addEventListener('click', () => {
+      shareMenu.classList.add('hidden');
+    });
+
+    shareMenu.addEventListener('click', (e) => {
+      e.stopPropagation();
+    });
+
+    // Copy link
+    copyLink.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(window.location.href);
+        copyLink.querySelector('span').textContent = '¡Copiado!';
+        setTimeout(() => {
+          copyLink.querySelector('span').textContent = 'Copiar enlace';
+        }, 2000);
+      } catch (err) {
+        console.error('Error al copiar:', err);
+      }
+    });
+  </script>
 </Layout>

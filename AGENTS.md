@@ -18,6 +18,11 @@ npm run preview # Preview build
 ## Notes
 - Logo en `public/vm_store.jpeg`
 - Nombre: VM STORE
+- Slogan: "Los mejores con lo mejor" 🧢 | GORRAS-ARTICULOS ORG/PREMIUM
+- Ubicación: Ibagué - Tolima
 - Enlaces en `src/pages/index.astro`: WhatsApp, TikTok, Instagram
 - Fuentes: Bebas Neue (título) + Poppins (body)
+- Modo oscuro/claro (toggle guardado en localStorage)
+- Animaciones: fade-in, hover scale, pulse en logo
+- Share buttons: WhatsApp + copiar enlace
 - Mobile-first, diseño urbano con gradientes neon
